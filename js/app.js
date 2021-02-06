@@ -1,7 +1,40 @@
-//adding tiles and positions to the board
+//initializing variables for adding positions to the board
 const $board = $('.board')
 const $letters = $('.boardLetters')
 const $numbers = $('.boardNumbers')
+let alphabet = ["a", "b", "c", "d", "e", "f", "g", "h"]
+let index = 0
+let black = false;
+let num = 1;
+
+for (let i = 0; i < 8; i++) { //loops to add num/letter positions
+  const $li = $('<li>')
+  $li.text(alphabet[i])
+  $letters.append($li)
+  const $num = $('<li>')
+  $num.text(num++)
+  $numbers.append($num)
+}
+
+//adding tiles to the board
+
+for (let i = 1; i <= 64; i++) {
+  const $tile = $('<div>').addClass("tile")
+  if (black) {
+    $tile.addClass("darkTile")
+    index++
+    black = !black; //makes next tile white
+  } else {
+    $tile.addClass("lightTile")
+    index++
+    black = !black;
+  }
+  $board.append($tile)
+  if (index === 8) { //reset for new row
+    black = !black; //sets black back to true
+    index = 0;
+  }
+}
 
 
 //buttons

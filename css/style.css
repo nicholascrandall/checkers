@@ -26,8 +26,8 @@ header {
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 860px;
-  width: 860px;
+  height: 880px;
+  width: 880px;
 }
 .board {
   margin: 0;
@@ -39,12 +39,12 @@ header {
   left: 50%;
   transform: translate(-50%, -50%);
   border: 5px solid black;
-  width: 800px;
-  height: 800px;%
+  width: 810px;
+  height: 810px;%
 }
 .tile {
-  height: 12.5%;
-  width: 12.5%;
+  height: 100px;
+  width: 100px;
 }
 .darkTile {
   background-color: black;
