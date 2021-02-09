@@ -41,7 +41,6 @@ header {
   border: 5px solid #432e1b;
   width: 810px;
   height: 810px;
-  cursor: pointer;
 }
 .tile {
   height: 100px;
@@ -76,4 +75,21 @@ li {
 }
 button {
 
+}
+.piece {
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  padding: 12px;
+  border-radius: 50px;
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 20px;
+  border: 1px solid black;
+}
+.blackpiece {
+  background-color: black;
+}
+.whitepiece {
+  background-color: white;
 }

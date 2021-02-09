@@ -19,7 +19,7 @@ for (let i = 0; i < 8; i++) { //loops to add num/letter positions
 //adding tiles to the board
 
 for (let i = 1; i <= 64; i++) {
-  const $tile = $('<div>').addClass("tile")
+  const $tile = $('<div>').addClass(`tile${i}`)
   if (black) {
     $tile.addClass("darkTile")
     index++
@@ -36,13 +36,31 @@ for (let i = 1; i <= 64; i++) {
   }
 }
 
+//adding pieces to the board
+for (let i = 1; i <=24; i++) {
+  const $tile = $(`.tile${i}`)
+  const $piece = $("<p>").addClass("blackpiece")
+  $piece.addClass("piece")
+  if ($tile.hasClass("darkTile")) {
+    $tile.append($piece)
+  }
+}
+for (let i = 41; i <=63; i++) {
+  const $tile = $(`.tile${i}`)
+  const $piece = $("<span>").addClass("whitepiece")
+  $piece.addClass("piece")
+  if ($tile.hasClass("darkTile")) {
+    $tile.append($piece)
+  }
+}
+
 
 //buttons
 //clicking resign ends the game and declares a winner
 //clicking new match starts a new game
 
-//odd numbers = black's turn, even numbers = white
-let playerTurn = 1
+//true = black's turn, false = white's
+let playerTurn = true
 let blackRemaining = 12 //how many pieces they have left
 let whiteRemaining = 12
 let player1 = ""
@@ -68,4 +86,11 @@ console.log(`player 2 has been assigned to ${player2}`);
 
 //should I make two different gameplay loops, one for each side?
 
-//board
+//adding on click functionality to each piece
+//during black's turn
+if (playerTurn) {
+  $('.blackpiece').on('click',()=> {
+    const $starterPiece = $(event.target)
+    console.log($starterPiece);
+  })
+}
