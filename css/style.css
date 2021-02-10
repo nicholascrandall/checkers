@@ -93,3 +93,6 @@ button {
 .whitepiece {
   background-color: white;
 }
+.highlighted {
+  background-color: #3ba4f5;
+}

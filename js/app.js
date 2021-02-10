@@ -47,7 +47,7 @@ for (let i = 1; i <=24; i++) {
 }
 for (let i = 41; i <=63; i++) {
   const $tile = $(`.tile${i}`)
-  const $piece = $("<span>").addClass("whitepiece")
+  const $piece = $("<p>").addClass("whitepiece")
   $piece.addClass("piece")
   if ($tile.hasClass("darkTile")) {
     $tile.append($piece)
@@ -59,12 +59,12 @@ for (let i = 41; i <=63; i++) {
 //clicking resign ends the game and declares a winner
 //clicking new match starts a new game
 
-//true = black's turn, false = white's
-let playerTurn = true
+//odds = black's turn, evens = white's
 let blackRemaining = 12 //how many pieces they have left
 let whiteRemaining = 12
 let player1 = ""
 let player2 = ""
+let $starterPiece = ""
 //randomize who's assigned to black/white
 const assigner = Math.floor(Math.random() * Math.floor(2))
 console.log(assigner);
@@ -84,13 +84,35 @@ if (assigner === 0) {
 console.log(`player 1 has been assigned to ${player1}`);
 console.log(`player 2 has been assigned to ${player2}`);
 
-//should I make two different gameplay loops, one for each side?
 
-//adding on click functionality to each piece
-//during black's turn
-if (playerTurn) {
-  $('.blackpiece').on('click',()=> {
-    const $starterPiece = $(event.target)
-    console.log($starterPiece);
+//check legal moves function
+const legalMoves = (starter) => {
+  const $legalTile = $('.darkTile:not(:has(>p))')
+  $legalTile.css("background-color", "#3ba4f5")
+
+
+  $legalTile.on('click',()=> {
+    event.target.append(starter[0])
+    $('.darkTile').css("background-color", "#6f3f32")
   })
+}
+
+
+for (let i = 1; i <= 100; i++) {
+  if (i %2 === 1) {
+    //adding on click functionality to each piece
+    //during black's turn
+    $('.blackpiece').on('click',()=> {
+      $starterPiece = $(event.path[0])
+      //run function that checks which moves are legal
+      legalMoves($starterPiece)
+    })
+    //during white's turn
+  } else if (i %2 === 0) {
+    $('.whitepiece').on('click',()=> {
+      const $starterPiece = $(event.target)
+      //run function that checks which moves are legal
+      legalMoves($starterPiece)
+    })
+  }
 }
