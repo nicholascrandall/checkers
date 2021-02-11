@@ -217,7 +217,7 @@ blacksTurn()
 
 
 
-//BACKUP
+//BACKUP FUNCTION
 //
 // const whiteLegal = (starter) => {
 //   let firstNum = ""

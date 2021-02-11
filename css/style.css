@@ -12,12 +12,9 @@ header {
   margin: auto;
   display: block;
 }
-.left-side {
+.status {
   display: flex;
-}
-.right-side {
-  display: flex;
-  justify-content: flex-end;
+  flex-flow: row wrap;
 }
 .positions {
   font-size: 20px;
@@ -95,4 +92,10 @@ button {
 }
 .highlighted {
   background-color: #3ba4f5;
+}
+.right {
+  margin-left: auto;
+}
+p {
+  font-size: 30px;
 }
