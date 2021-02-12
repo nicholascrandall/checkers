@@ -125,6 +125,7 @@ const whiteRightJump = (startingTileNumber) => {
 
 //check legal moves function (black)
 const blackLegal = (starter) => {
+  $("*").unbind();
   let firstNum = ""
   let firstClass = ""
   let secondNum = ""
@@ -137,8 +138,69 @@ const blackLegal = (starter) => {
   const num = parseInt(sliced, 10)
 
   let $legalTile = $('.darkTile:not(:has(>p))')
-//black pov left corner
-  if (starter.parent()[0].classList.contains("tile9") || starter.parent()[0].classList.contains("tile25") || starter.parent()[0].classList.contains("tile41")) {
+
+//blackpiece in bottom row not in corner
+  if (starter.parent()[0].classList.contains("tile59") || starter.parent()[0].classList.contains("tile61") || starter.parent()[0].classList.contains("tile63")) {
+    firstNum = num-7
+    firstClass = (".tile"+firstNum.toString())
+    // console.log(firstClass);
+
+    secondNum = num-9
+    secondClass = (".tile"+secondNum.toString())
+    // console.log(secondClass);
+
+    //if first target has an opposing piece
+        if (checkOpposing(firstClass, "whitepiece") && whiteLeftJump(num)) {
+
+          const $jumpedPiece = $(`${firstClass} > p`)
+
+          firstNum = num-14
+          firstClass = (".tile"+firstNum.toString())
+          // console.log(firstClass);
+
+          if ($(`${firstClass}`)[0].hasChildNodes() === false) {
+            $jumpedPiece.addClass("jumped")
+          }
+          $legalTile = $(`${firstClass}:not(:has(>p))`)
+    //if second has an opposing piece and isn't in a corner
+  } else if (checkOpposing(secondClass, "whitepiece") && $(`${secondClass}`)[0].classList.contains("tile56") === false && whiteRightJump(num)) {
+
+          const $jumpedPiece = $(`${secondClass} > p`)
+
+          secondNum = num-18
+          secondClass = (".tile"+secondNum.toString())
+          // console.log(secondClass);
+
+          if ($(`${secondClass}`)[0].hasChildNodes() === false) {
+            $jumpedPiece.addClass("jumped")
+          }
+          $legalTile = $(`${secondClass}:not(:has(>p))`)
+  } else { //if no jumps can be made
+    $legalTile = $(`${firstClass}:not(:has(>p)), ${secondClass}:not(:has(>p))`)
+    // console.log("black center");
+  }
+//blackpiece in bottom row in corner
+} else if (starter.parent()[0].classList.contains("tile57")) {
+  firstNum = num-7
+  firstClass = (".tile"+firstNum.toString())
+
+  if (checkOpposing(firstClass, "whitepiece") && whiteLeftJump(num)) {
+
+    const $jumpedPiece = $(`${firstClass} > p`)
+
+    firstNum = num-14
+    firstClass = (".tile"+firstNum.toString())
+    // console.log(firstClass);
+
+    if ($(`${firstClass}`)[0].hasChildNodes() === false) {
+      $jumpedPiece.addClass("jumped")
+    }
+  }
+  $legalTile = $(`${firstClass}:not(:has(>p))`)
+
+
+  //black pov left corner
+ } else if (starter.parent()[0].classList.contains("tile9") || starter.parent()[0].classList.contains("tile25") || starter.parent()[0].classList.contains("tile41")) {
 
 
     firstNum = num+9
@@ -249,6 +311,7 @@ const blackLegal = (starter) => {
   })
 }
 const whiteLegal = (starter) => {
+  $("*").unbind();
   let firstNum = ""
   let firstClass = ""
   let secondNum = ""
@@ -262,8 +325,66 @@ const whiteLegal = (starter) => {
 
   let $legalTile = $('.darkTile:not(:has(>p))')
 
+  //whitepiece in top row not in corner
+  if (starter.parent(".tile2")[0] || starter.parent(".tile4")[0] || starter.parent(".tile6")[0]) {
+
+    firstNum = num+7
+    firstClass = (".tile"+firstNum.toString())
+    // console.log(firstClass);
+
+    secondNum = num+9
+    secondClass = (".tile"+secondNum.toString())
+    // console.log(secondClass);
+
+    //if first target has a piece, isn't in a corner and can be jumped
+    if (checkOpposing(firstClass, "blackpiece") && $(`${firstClass}`)[0].classList.contains("tile9") === false && blackRightJump(num)) {
+
+      const $jumpedPiece = $(`${firstClass} > p`)
+
+      firstNum = num+14
+      firstClass = (".tile"+firstNum.toString())
+      // console.log(firstClass);
+
+      if ($(`${firstClass}`)[0].hasChildNodes() === false) {
+        $jumpedPiece.addClass("jumped")
+      }
+      $legalTile = $(`${firstClass}:not(:has(>p))`)
+      //if second target has a piece and can be jumped
+  } else if (checkOpposing(secondClass, "blackpiece") && blackLeftJump(num)) {
+
+        const $jumpedPiece = $(`${secondClass} > p`)
+        secondNum = num+18
+        secondClass = (".tile"+secondNum.toString())
+        // console.log(secondClass);
+        if ($(`${secondClass}`)[0].hasChildNodes() === false) {
+          $jumpedPiece.addClass("jumped")
+        }
+        // console.log(secondClass);
+        $legalTile = $(`${secondClass}:not(:has(>p))`)
+      } else { //if no jumps can be made
+        $legalTile = $(`${firstClass}:not(:has(>p)), ${secondClass}:not(:has(>p))`)
+        // console.log("black center");
+      }
+  //whitepiece in top row in corner
+} else if (starter.parent(".tile8")[0]) {
+  firstNum = num+7
+  firstClass = (".tile"+firstNum.toString())
+  // console.log(firstClass);
+//if target has a jumpable opposing piece
+  if (checkOpposing(firstClass, "blackpiece") && blackRightJump(num)) {
+    const $jumpedPiece = $(`${firstClass} > p`)
+
+    firstNum = num+14
+    firstClass = (".tile"+firstNum.toString())
+    // console.log(firstClass);
+    if ($(`${firstClass}`)[0].hasChildNodes() === false) {
+      $jumpedPiece.addClass("jumped")
+    }
+
+  }
+  $legalTile = $(`${firstClass}:not(:has(>p))`)
   //white pov left corner
-  if (starter.parent(".tile9")[0] || starter.parent(".tile25")[0] || starter.parent(".tile41")[0] || starter.parent("tile57")[0]) {
+  } else if (starter.parent(".tile9")[0] || starter.parent(".tile25")[0] || starter.parent(".tile41")[0] || starter.parent("tile57")[0]) {
 
     firstNum = num-7
     firstClass = (".tile"+firstNum.toString())
@@ -378,6 +499,7 @@ const whiteLegal = (starter) => {
       // console.log($starterPiece[0]);
       //run function that checks which moves are legal
       blackLegal($starterPiece)
+      console.log("func called");
     })
   }
     //during white's turn
@@ -388,6 +510,7 @@ const whiteLegal = (starter) => {
       // console.log($starterPiece[0]);
       //run function that checks which moves are legal
       whiteLegal($starterPiece)
+      console.log("func called")
     })
   }
 
