@@ -54,10 +54,13 @@ for (let i = 41; i <=63; i++) {
   }
 }
 
-
 //buttons
-//clicking resign ends the game and declares a winner
 //clicking new match starts a new game
+const newMatch = document.querySelector("body > header > button")
+newMatch.addEventListener('click', ()=> {
+  console.log("clicked");
+  location.reload();
+})
 
 //true = black's turn, false = white's
 let playerTurn = true
@@ -499,7 +502,6 @@ const whiteLegal = (starter) => {
       // console.log($starterPiece[0]);
       //run function that checks which moves are legal
       blackLegal($starterPiece)
-      console.log("func called");
     })
   }
     //during white's turn
@@ -510,7 +512,6 @@ const whiteLegal = (starter) => {
       // console.log($starterPiece[0]);
       //run function that checks which moves are legal
       whiteLegal($starterPiece)
-      console.log("func called")
     })
   }
 
