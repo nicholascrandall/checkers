@@ -3,6 +3,8 @@ A locally hosted two-player checkers game made in JS, HTML, and CSS.
 
 Wireframe: https://wireframe.cc/PRxKLd
 
+[Deployment](https://nicholascrandall.github.io/checkers/)
+
 User Stories:
 
 1. Black always moves first, followed by white.
